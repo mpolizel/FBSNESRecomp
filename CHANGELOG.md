@@ -14,5 +14,8 @@ audio interpolation (I key: Gaussian, Cubic, Sinc); update check on start that
 backs up your saves before installing; asks for the dedicated graphics card
 on laptops with two; console-free Windows build.
 
+The game keeps the console's speed (60 frames per second) through the
+polygon cutscenes, where the host used to fall about 2% behind.
+
 It ships with every framework fix of the earlier ports (see README → Framework
 patches), so the problems found there do not come back here.

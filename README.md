@@ -115,6 +115,7 @@ git -C snesrecomp apply ../patches/snesrecomp-raster-oam-and-hdma.patch
 git -C snesrecomp apply ../patches/snesrecomp-raster-vram-journal.patch
 git -C snesrecomp apply ../patches/snesrecomp-resume-state-restart.patch
 git -C snesrecomp apply ../patches/snesrecomp-shader-forces-opengl.patch
+git -C snesrecomp apply ../patches/snesrecomp-timing-frame-pacing.patch
 git -C recomp-ui apply ../patches/recomp-ui-host-toggle.patch
 ```
 
@@ -153,6 +154,13 @@ the frame driver booted from the reset vector over it. The restart file is
 now written in the rollback format (machine plus execution residue), and the
 frame driver takes the interpreter's resume point at the start of a frame.
 Save-state slots keep their format.
+
+`snesrecomp-timing-frame-pacing.patch` keeps the game at the console's 60.1
+frames per second. A frame whose CPU half runs past the end of the field is
+followed by a shorter one, and the host counted the overrun twice (the short
+frame was raised to a whole one); it also waited past its deadlines and threw
+the lateness away. Flashback's polygon intro, which overruns often, ran at
+58.9 fps and fell behind the console. Now 59.9, with the same pictures.
 
 `snesrecomp-mosaic-frame-model.patch` builds the mosaic table on every visible
 line. The optimized renderer built it only on line 0, which frame-model hosts
