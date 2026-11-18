@@ -298,6 +298,65 @@ Either way the ROM is checked against the digests above before anything boots
 — a dump that could not have produced this build is refused at the door rather
 than mis-executing ten frames in.
 
+# Building on Linux (Ubuntu/Mint)
+The project can be built successfully on Linux.
+
+## Tested on:
+
+Linux Mint
+GCC 13
+CMake 3.28
+Rust 1.100
+## Clone
+git clone --recursive https://github.com/mpolizel/FBSNESRecomp.git
+or
+git submodule update --init --recursive
+# Dependencies
+## Core build dependencies
+sudo apt install \
+    build-essential \
+    cmake \
+    git
+## Graphics dependencies
+sudo apt install \
+    libx11-dev \
+    libxext-dev \
+    libxrandr-dev \
+    libxcursor-dev \
+    libxi-dev \
+    libxfixes-dev \
+    libxinerama-dev \
+    libxss-dev \
+    libxtst-dev \
+    libxxf86vm-dev \
+    libwayland-dev \
+    wayland-protocols \
+    libxkbcommon-dev \
+    libgl1-mesa-dev \
+    libglu1-mesa-dev
+## Audio dependencies
+sudo apt install \
+    libasound2-dev \
+    libpulse-dev \
+    libpipewire-0.3-dev \
+    libjack-jackd2-dev
+## Rust
+The distribution-provided Rust may be too old.
+
+## Install Rust using rustup:
+
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source ~/.cargo/env
+## ROM generation
+bash tools/regen.sh --rom "/path/to/Flashback - The Quest for Identity (USA) (En,Fr,De).sfc"
+## Build
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build -j$(nproc)
+## Result
+The project builds and runs successfully on Linux.
+<img width="960" height="752" alt="image" src="https://github.com/user-attachments/assets/93777dd4-784e-45a1-b8ef-f9e5ac7e5adf" />
+
+
 ## Layout
 
 | Path | What lives there |
